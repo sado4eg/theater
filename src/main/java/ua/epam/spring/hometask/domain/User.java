@@ -15,6 +15,8 @@ public class User extends DomainObject {
 
     private String email;
 
+    private UserType type;
+
     private NavigableSet<Ticket> tickets = new TreeSet<>();
 
     public String getFirstName() {
@@ -49,45 +51,46 @@ public class User extends DomainObject {
         this.tickets = tickets;
     }
 
+    public UserType getType() {
+        return type;
+    }
+
+    public void setType(UserType type) {
+        this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (!firstName.equals(user.firstName)) return false;
+        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
+        if (!email.equals(user.email)) return false;
+        if (type != user.type) return false;
+        return tickets != null ? tickets.equals(user.tickets) : user.tickets == null;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, email);
+        int result = firstName.hashCode();
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + email.hashCode();
+        result = 31 * result + type.hashCode();
+        result = 31 * result + (tickets != null ? tickets.hashCode() : 0);
+        return result;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        User other = (User) obj;
-        if (email == null) {
-            if (other.email != null) {
-                return false;
-            }
-        } else if (!email.equals(other.email)) {
-            return false;
-        }
-        if (firstName == null) {
-            if (other.firstName != null) {
-                return false;
-            }
-        } else if (!firstName.equals(other.firstName)) {
-            return false;
-        }
-        if (lastName == null) {
-            if (other.lastName != null) {
-                return false;
-            }
-        } else if (!lastName.equals(other.lastName)) {
-            return false;
-        }
-        return true;
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", type=" + type +
+                ", tickets=" + tickets +
+                '}';
     }
-
 }

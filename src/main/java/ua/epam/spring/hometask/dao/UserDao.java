@@ -1,12 +1,10 @@
 package ua.epam.spring.hometask.dao;
 
+import ua.epam.spring.hometask.NotFoundException;
 import ua.epam.spring.hometask.domain.User;
 
-/**
- * Created by alex on 18.03.2018.
- */
-public interface UserDao {
+public interface UserDao extends AbstractDao<User> {
 
-    public User getByName(String name);
+    User getByEmail(String name) throws NotFoundException;
 
 }
