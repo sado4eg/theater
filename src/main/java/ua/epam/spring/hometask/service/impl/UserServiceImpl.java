@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(@Nonnull User object) {
-        return null;
+    public User save(@Nonnull User user) {
+        return userDao.save(user);
     }
 
     @Override
@@ -41,6 +41,6 @@ public class UserServiceImpl implements UserService {
     @Nonnull
     @Override
     public Collection<User> getAll() {
-        return null;
+        return userDao.findAll();
     }
 }

@@ -6,7 +6,7 @@ import com.sun.xml.internal.ws.addressing.model.ActionNotSupportedException;
 public enum EntryActions {
     LOGIN(1, "Log In"),
     REGISTRATION(2, "Registration"),
-    EXIT(3, "Log out from the app");
+    EXIT(0, "Log out from the app");
 
     private int id;
     private String action;

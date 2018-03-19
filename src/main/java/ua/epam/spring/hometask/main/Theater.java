@@ -16,6 +16,7 @@ import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Theater {
 
@@ -86,11 +87,18 @@ public class Theater {
                 case VIEW_TICKETS:
                     viewTickets();
                     break;
+                case VIEW_CUSTOMERS:
+                    viewCustomers();
+                    break;
                 case LOG_OUT:
                     entryPoint();
                     return;
             }
         }
+    }
+
+    private void viewCustomers() {
+        System.out.println(userService.getAll().stream().filter(user -> user.getType() == UserType.CUSTOMER).collect(Collectors.toList()));
     }
 
     private void viewTickets() {
@@ -147,7 +155,15 @@ public class Theater {
     }
 
     private User registration() {
-        return null;
+        User user = new User();
+        user.setType(UserType.CUSTOMER);
+        System.out.println("Enter email:");
+        user.setEmail(scanner.nextLine());
+        System.out.println("Enter First Name:");
+        user.setFirstName(scanner.nextLine());
+        System.out.println("Enter Last Name:");
+        user.setLastName(scanner.nextLine());
+        return userService.save(user);
     }
 
 

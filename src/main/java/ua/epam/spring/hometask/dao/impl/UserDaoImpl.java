@@ -6,17 +6,13 @@ import ua.epam.spring.hometask.dao.UserDao;
 import ua.epam.spring.hometask.domain.User;
 
 import javax.annotation.PostConstruct;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class UserDaoImpl implements UserDao {
 
+    private static Map<String, User> users = new HashMap<>();
     @Autowired
     private User admin;
-
-    private static Map<String, User> users;
 
     @PostConstruct
     private void init(){
@@ -51,7 +47,12 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User save(User user) {
-        users.put(user.getFirstName(), user);
+        if (user.getId() == null) {
+            OptionalLong lastId = users.values().stream().mapToLong(User::getId).max();
+            Long newId = lastId.orElse(0L) + 1L;
+            user.setId(newId);
+        }
+        users.put(user.getEmail(), user);
         return user;
     }
 

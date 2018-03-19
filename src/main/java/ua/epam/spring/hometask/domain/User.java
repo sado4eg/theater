@@ -1,7 +1,6 @@
 package ua.epam.spring.hometask.domain;
 
 import java.util.NavigableSet;
-import java.util.Objects;
 import java.util.TreeSet;
 
 /**
@@ -85,12 +84,12 @@ public class User extends DomainObject {
 
     @Override
     public String toString() {
-        return "User{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", type=" + type +
-                ", tickets=" + tickets +
-                '}';
+        return "User{\n" +
+                "   firstName='" + firstName + '\'' +
+                "\n lastName='" + lastName + '\'' +
+                "\n email='" + email + '\'' +
+                "\n type=" + type +
+                "\n tickets=" + tickets +
+                "}\n";
     }
 }

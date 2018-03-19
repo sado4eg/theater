@@ -6,7 +6,8 @@ public enum AdminActions {
     CREATE_EVENT(1, "Create new event"),
     VIEW_EVENTS(2, "View all events"),
     VIEW_TICKETS(3, "View all bought tickets"),
-    LOG_OUT(4, "Log out from the app");
+    VIEW_CUSTOMERS(4, "View all customers"),
+    LOG_OUT(0, "Log out from the app");
 
     private int id;
     private String action;
